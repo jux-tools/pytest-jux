@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-09-26
+
+### Security
+
+- Require `cryptography>=46.0.5` (was `>=41.0`) so an install can no longer resolve a version
+  affected by CVE-2026-26007 (GHSA-r6ph-v2qm-q3c2), a subgroup attack on SECT curves caused by
+  missing subgroup validation. The lockfile already pinned 46.0.5, but the lockfile does not
+  ship in the package
+- Require `py-juxlib>=0.3.3`, which carries the same floor
+
+### Fixed
+
+- Release workflow: pin `pypa/gh-action-pypi-publish` to v1.14.2, whose twine accepts the
+  `Metadata-Version: 2.5` that current hatchling writes
+
+### Changed
+
+- Migrated GitHub URLs to the jux-tools organization
+- Adopted the two-stage pre-commit pattern
+- Updated the C4 architecture model for the py-juxlib dependency
+
 ## [0.6.0] - 2026-02-12
 
 ### Changed
