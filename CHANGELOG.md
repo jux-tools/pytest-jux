@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.3] - 2026-09-26
+
 ### Fixed
 
 - CI: install with `uv sync --locked` in the test and security jobs, so CI runs the locked tool
@@ -20,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   that same file; it previously audited the runner's Python
 - Security Scanning: pin `aquasecurity/trivy-action` to v0.36.0 (Trivy v0.70.0); the previous
   pin installed Trivy v0.68.1, whose GitHub release no longer exists
+- Security Scanning: upgrade `ossf/scorecard-action` to v2.4.4, which pulls its image from
+  ghcr.io; v2.4.0's `gcr.io/openssf` image is refused because billing is disabled on the
+  OpenSSF project hosting it
 
 ### Security
 
