@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytest-jux"
-version = "0.6.1"
+version = "0.6.2"
 description = "A pytest plugin for signing and publishing JUnit XML test reports to the Jux REST API"
 readme = "README.md"
 requires-python = ">=3.11"
