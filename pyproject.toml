@@ -202,7 +202,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
-"tests/*" = ["B008", "S101"]  # S101: Allow assert in tests
+"tests/*" = ["B008", "S101", "S320"]  # S101: assert; S320: lxml parses test-generated fixtures
 
 [tool.ruff.format]
 quote-style = "double"

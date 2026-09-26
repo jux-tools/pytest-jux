@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Release workflow: pin `pypa/gh-action-pypi-publish` to v1.14.2, whose twine accepts the
   `Metadata-Version: 2.5` that current hatchling writes
+- Tests: `jux-sign` stdout tests replace `sys.stdout` with a real stream instead of a `Mock`,
+  which Python 3.14's argparse rejected when probing `fileno()` for colour support; `jux-inspect`
+  tests strip ANSI styling, so they pass when `FORCE_COLOR` is set
 
 ### Changed
 
