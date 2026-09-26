@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- CI: install with `uv sync --locked` in the test and security jobs, so CI runs the locked tool
+  versions instead of whatever `uv pip install --system` resolved on the day
+- Security Scanning: audit the locked dependency set instead of the runner's Python, which held
+  the toolchain's own packages and pytest-jux itself (not yet on PyPI at the version being
+  built, so `pip-audit --strict` could not pass). Runtime and `dev` gate; all extras are audited
+  report-only, because `safety` (security extra) pulls in `nltk`, whose PYSEC-2026-3740 has no
+  fixed release
+- Security Scanning: the SBOM job builds the SBOM from the locked runtime requirements and audits
+  that same file; it previously audited the runner's Python
+- Security Scanning: pin `aquasecurity/trivy-action` to v0.36.0 (Trivy v0.70.0); the previous
+  pin installed Trivy v0.68.1, whose GitHub release no longer exists
+
+### Security
+
+- Release workflow: pass the `workflow_dispatch` tag input through `env` instead of expanding it
+  into the script (zizmor `template-injection`), and reject any version that is not
+  `[v]X.Y.Z[-suffix]` before it is written to a step output that later scripts expand
+- CI: `persist-credentials: false` on every `actions/checkout` (zizmor `artipacked`)
+- Release workflow: disable `setup-uv` caching (zizmor `cache-poisoning`); upgrade the SLSA
+  generic generator to v2.1.0, kept referenced by tag as slsa-verifier requires
+
 ## [0.6.2] - 2026-09-26
 
 First release carrying the 0.6.1 security fix to PyPI.
