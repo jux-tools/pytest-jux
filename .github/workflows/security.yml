@@ -163,16 +163,6 @@ jobs:
           echo "Generated SBOM:"
           ls -lh pytest-jux-sbom.cdx.json
 
-      - name: Install CycloneDX CLI (via npm)
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: '20'
-
-      - name: Install cyclonedx-cli
-        continue-on-error: true  # Package name needs verification, non-critical for release
-        run: |
-          npm install -g @cyclonedx/cdxgen@12.0.0 || echo "CLI installation skipped"
-
       - name: Validate SBOM
         continue-on-error: true  # Non-critical validation step
         run: |
@@ -193,22 +183,8 @@ jobs:
         run: |
           uv pip install --system pip-audit
 
-          # Convert SBOM to requirements.txt format
-          cyclonedx-cli convert \
-            --input-file pytest-jux-sbom.cdx.json \
-            --output-format requirements.txt \
-            --output-file sbom-requirements.txt || {
-              echo "Warning: SBOM conversion not available in this version of cyclonedx-cli"
-              echo "Falling back to direct pip-audit scan"
-            }
-
-          # Audit dependencies
-          if [ -f sbom-requirements.txt ]; then
-            pip-audit -r sbom-requirements.txt --desc --strict
-          else
-            # Fallback: audit installed packages
-            pip-audit --desc --strict
-          fi
+          # Audit installed packages
+          pip-audit --desc --strict
 
       - name: Upload SBOM artifact
         if: always()
