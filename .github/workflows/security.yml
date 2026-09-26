@@ -16,7 +16,7 @@ jobs:
   security-scan:
     name: Security Vulnerability Scanning
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
@@ -58,7 +58,7 @@ jobs:
           echo "Note: Safety CLI requires authentication. Using pip-audit for vulnerability scanning."
           echo "pip-audit results are available in the pip-audit-report artifact."
         continue-on-error: true
-      
+
       - name: Upload pip-audit report
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -73,7 +73,7 @@ jobs:
           name: ruff-security-report
           path: ruff-security-report.json
 
-  
+
   dependency-review:
     name: Dependency Review
     runs-on: ubuntu-latest
@@ -87,7 +87,7 @@ jobs:
         uses: actions/dependency-review-action@3c4e3dcb1aa7874d2c16be7d79418e9b7efd6261 # v4
         with:
           fail-on-severity: moderate
-  
+
   trivy-scan:
     name: Trivy Filesystem Scan
     runs-on: ubuntu-latest
@@ -132,7 +132,7 @@ jobs:
         with:
           name: trivy-results
           path: trivy-results.sarif
-  
+
   sbom-validation:
     name: SBOM Validation & Dependency Audit
     runs-on: ubuntu-latest

@@ -1157,7 +1157,7 @@ wheels = [
 
 [[package]]
 name = "py-juxlib"
-version = "0.3.1"
+version = "0.3.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cryptography" },
@@ -1167,9 +1167,9 @@ dependencies = [
     { name = "rich" },
     { name = "signxml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/a1/ec/bf0fdd21952ad3a5c15445fe8db62a5910118559dc3a799435fda9afe485/py_juxlib-0.3.1.tar.gz", hash = "sha256:8e0cc5794420031a61c076ebb39d6c547828cfbe99fcc4085fa26b3fb275151b", size = 60385, upload-time = "2026-02-13T05:55:18.792Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/71/96/609857a42f36726dc532505fe27bec8a626100827f5cfbe7283e9f7ddb43/py_juxlib-0.3.3.tar.gz", hash = "sha256:626d51670caadaf58c32a09741838323d06e79214c18617abaa98ef1bbc13da9", size = 60385, upload-time = "2026-09-26T10:51:31.61Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/09/33/cdf183764cda30519750694ff78938e347130382106a6031262adc992c2a/py_juxlib-0.3.1-py3-none-any.whl", hash = "sha256:2c42ca51e4d15448642a2356d69005cf685bdc7da7ef39067189fe97d5030a28", size = 46492, upload-time = "2026-02-13T05:55:17.48Z" },
+    { url = "https://files.pythonhosted.org/packages/59/be/6a03453da649690e5a27403363d665604b9497e9334331a3e1b7d24af3fd/py_juxlib-0.3.3-py3-none-any.whl", hash = "sha256:e521d114253b7eca937d945b2d46e51222be21e3c8147062653f0fc7f80e38f9", size = 46490, upload-time = "2026-09-26T10:51:29.991Z" },
 ]
 
 [[package]]
@@ -1351,7 +1351,7 @@ wheels = [
 
 [[package]]
 name = "pytest-jux"
-version = "0.6.0"
+version = "0.6.1"
 source = { editable = "." }
 dependencies = [
     { name = "configargparse" },
@@ -1395,7 +1395,7 @@ security = [
 requires-dist = [
     { name = "configargparse", specifier = ">=1.7" },
     { name = "coverage", extras = ["toml"], marker = "extra == 'dev'", specifier = ">=7.3" },
-    { name = "cryptography", specifier = ">=41.0" },
+    { name = "cryptography", specifier = ">=46.0.5" },
     { name = "furo", marker = "extra == 'docs'", specifier = ">=2024.0" },
     { name = "hypothesis", marker = "extra == 'dev'", specifier = ">=6.92" },
     { name = "lxml", specifier = ">=5.0" },
@@ -1403,7 +1403,7 @@ requires-dist = [
     { name = "myst-parser", marker = "extra == 'docs'", specifier = ">=4.0" },
     { name = "pip-audit", marker = "extra == 'security'", specifier = ">=2.6" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=3.5" },
-    { name = "py-juxlib", specifier = ">=0.3.0" },
+    { name = "py-juxlib", specifier = ">=0.3.3" },
     { name = "pydantic", specifier = ">=2.5" },
     { name = "pytest", specifier = ">=7.4" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.1" },

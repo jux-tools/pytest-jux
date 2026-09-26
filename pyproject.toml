@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pytest-jux"
-version = "0.6.0"
+version = "0.6.1"
 description = "A pytest plugin for signing and publishing JUnit XML test reports to the Jux REST API"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -36,10 +36,10 @@ classifiers = [
 ]
 
 dependencies = [
-    "py-juxlib>=0.3.0",
+    "py-juxlib>=0.3.3",
     "lxml>=5.0",
     "signxml>=3.2",
-    "cryptography>=41.0",
+    "cryptography>=46.0.5",
     "pytest>=7.4",
     "pytest-metadata>=3.0",
     "configargparse>=1.7",
@@ -202,7 +202,7 @@ ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
-"tests/*" = ["B008", "S101"]  # S101: Allow assert in tests
+"tests/*" = ["B008", "S101", "S320"]  # S101: assert; S320: lxml parses test-generated fixtures
 
 [tool.ruff.format]
 quote-style = "double"

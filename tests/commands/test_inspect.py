@@ -3,6 +3,7 @@
 
 """Tests for jux-inspect command."""
 
+import re
 import sys
 from io import StringIO
 from pathlib import Path
@@ -19,6 +20,11 @@ from pytest_jux.commands.keygen import (
     save_key,
 )
 from pytest_jux.signer import sign_xml
+
+
+def _plain(text: str) -> str:
+    """Strip ANSI styling, which rich emits when FORCE_COLOR is set."""
+    return re.sub(r"\x1b\[[0-9;]*m", "", text)
 
 
 @pytest.fixture
@@ -97,7 +103,7 @@ class TestInspectCommand:
             exit_code = main()
 
         assert exit_code == 0
-        output = captured_stdout.getvalue()
+        output = _plain(captured_stdout.getvalue())
         assert "Test Report Summary" in output
         assert "Tests" in output and "10" in output
         assert "Failures" in output and "2" in output
@@ -116,7 +122,7 @@ class TestInspectCommand:
             exit_code = main()
 
         assert exit_code == 0
-        output = captured_stdout.getvalue()
+        output = _plain(captured_stdout.getvalue())
         assert "Test Report Summary" in output
         assert "Tests" in output and "5" in output
         assert "Failures" in output and "1" in output
@@ -138,7 +144,7 @@ class TestInspectCommand:
             exit_code = main()
 
         assert exit_code == 0
-        output = captured_stdout.getvalue()
+        output = _plain(captured_stdout.getvalue())
         assert "Test Report Summary" in output
         assert "Tests" in output and "10" in output
 
@@ -155,7 +161,7 @@ class TestInspectCommand:
             exit_code = main()
 
         assert exit_code == 0
-        output = captured_stdout.getvalue()
+        output = _plain(captured_stdout.getvalue())
         assert '"tests": 10' in output
         assert '"failures": 2' in output
         assert '"errors": 1' in output
@@ -173,7 +179,7 @@ class TestInspectCommand:
             exit_code = main()
 
         assert exit_code == 0
-        output = captured_stdout.getvalue()
+        output = _plain(captured_stdout.getvalue())
         assert '"tests": 5' in output
         assert '"failures": 1' in output
         assert '"signed": true' in output
@@ -189,7 +195,7 @@ class TestInspectCommand:
             exit_code = main()
 
         assert exit_code == 0
-        output = captured_stdout.getvalue()
+        output = _plain(captured_stdout.getvalue())
         # SHA-256 hash should be 64 hex characters
         assert "Canonical Hash" in output or "SHA-256" in output
 
@@ -237,7 +243,7 @@ class TestInspectCommand:
             exit_code = main()
 
         assert exit_code == 0
-        output = captured_stdout.getvalue()
+        output = _plain(captured_stdout.getvalue())
         # Should aggregate across all suites
         assert "Tests" in output and "5" in output
         assert "Failures" in output and "1" in output
@@ -263,7 +269,7 @@ class TestInspectCommand:
             exit_code = main()
 
         assert exit_code == 0
-        output = captured_stdout.getvalue()
+        output = _plain(captured_stdout.getvalue())
         assert "Tests" in output and "0" in output
 
     def test_generic_exception_with_json(self, unsigned_xml: Path) -> None:
@@ -284,7 +290,7 @@ class TestInspectCommand:
             exit_code = main()
 
         assert exit_code == 1
-        output = captured_stdout.getvalue()
+        output = _plain(captured_stdout.getvalue())
         assert "error" in output.lower()
         assert "unexpected error" in output.lower()
 

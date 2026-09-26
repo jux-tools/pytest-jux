@@ -142,12 +142,12 @@ class TestSignCommand:
 
     def test_writes_to_stdout(self, test_xml: Path, test_key: Path) -> None:
         """Test writing signed XML to stdout."""
-        from io import BytesIO
-        from unittest.mock import Mock
+        from io import BytesIO, TextIOWrapper
 
+        # A real stream, not a Mock: Python 3.14's argparse probes
+        # sys.stdout.fileno() to decide on colour output.
         captured_output = BytesIO()
-        mock_stdout = Mock()
-        mock_stdout.buffer = captured_output
+        mock_stdout = TextIOWrapper(captured_output, encoding="utf-8")
 
         with patch(
             "sys.argv", ["jux-sign", "--input", str(test_xml), "--key", str(test_key)]
@@ -181,13 +181,12 @@ class TestSignCommand:
 
     def test_stdin_to_stdout(self, test_xml: Path, test_key: Path) -> None:
         """Test reading from stdin and writing to stdout (pipeline mode)."""
-        from io import BytesIO
-        from unittest.mock import Mock
+        from io import BytesIO, TextIOWrapper
 
         xml_content = test_xml.read_text()
+        # A real stream, not a Mock: see test_writes_to_stdout.
         captured_output = BytesIO()
-        mock_stdout = Mock()
-        mock_stdout.buffer = captured_output
+        mock_stdout = TextIOWrapper(captured_output, encoding="utf-8")
 
         with patch("sys.argv", ["jux-sign", "--key", str(test_key)]):
             with patch("sys.stdin", StringIO(xml_content)):
