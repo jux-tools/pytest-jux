@@ -7,7 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.2] - 2026-09-26
+
+First release carrying the 0.6.1 security fix to PyPI.
+
+### Security
+
+- Refresh `uv.lock` (73 packages). The lockfile pinned versions with known advisories —
+  `requests` 2.32.5 (PYSEC-2026-2275), `urllib3` 2.6.3 (PYSEC-2026-141, PYSEC-2026-142),
+  `soupsieve` 2.8, `virtualenv` 20.35.3 — which the development and CI environments installed
+  and the scheduled security scan reported. The published package was not affected: a fresh
+  install resolves current releases
+- Known and unfixed: `nltk` 3.10.3 (PYSEC-2026-3740), pulled in by `safety` through the optional
+  `security` extra; no fixed release exists yet
+
 ## [0.6.1] - 2026-09-26
+
+Tagged but never published to PyPI; see 0.6.2.
 
 ### Security
 
